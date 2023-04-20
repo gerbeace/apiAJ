@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>random quotes</title>
+  </head>
+  <body>
+
+        <h1>Random Quotes Generator</h1>
+        <div id="quote"></div>
+        <button id="button">generate random quotes</button>
+
+    <script>    
+        
+        const apiUrl = 'https://api.quotable.io/random';
+
+        // Function para makakuha ng random quote mula sa API
+        async function getQuote() {
+        const response = await fetch(apiUrl); // I-fetch ang API endpoint or nagpapadala ng isang HTTP request sa isang URL
+        const data = await response.json(); // I-convert ang response data sa JSON format
+        return data.content; // Kunin ang content ng random quote
+        }
+
+        // Function para i-display ang random quote sa page
+        async function displayQuote() {
+        const quote = await getQuote(); // tawagin ang getQuote() function para makakuha ng random quote
+        const quoteDiv = document.getElementById('quote'); // Kunin ang div element kung saan id-display ang quote
+        quoteDiv.innerHTML = `"${quote}"`; // I-display ang quote sa div element
+        }
+
+        const button = document.getElementById('button'); // Kunin ang button element
+        button.addEventListener('click', displayQuote); // Add eventlistener para kapag na-click ang button, tatawagin nya ang displayQuote() function
+
+        displayQuote(); // tatawagin nya ang displayQuote() function by default para mag-display ang random quote sa page
+    </script>
+  </body>
+</html>
